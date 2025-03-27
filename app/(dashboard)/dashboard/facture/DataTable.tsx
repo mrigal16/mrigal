@@ -132,7 +132,7 @@ export function DataTableToolbar<TData>({
 interface DataTableFacetedFilter<TData, TValue> {
   column?: Column<TData, TValue>;
   etat?: string;
-  Date?: string;
+
   options: {
     label: string;
     value: string;
@@ -143,7 +143,6 @@ interface DataTableFacetedFilter<TData, TValue> {
 export function DataTableFacetedFilter<TData, TValue>({
   column,
   etat,
-  Date,
   options,
 }: DataTableFacetedFilter<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();

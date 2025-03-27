@@ -1,6 +1,5 @@
-import { BetterAuthPlugin, createAuthEndpoint } from "better-auth/plugins";
 import { headers } from "next/headers";
-import { z } from "zod";
+
 import { auth } from "./auth";
 
 export async function getUser() {

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { Settings } from "./settings";
+
 import { getUser } from "@/lib/plugin";
 import ActivityPage from "./facture/page";
 

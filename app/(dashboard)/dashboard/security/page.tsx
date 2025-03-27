@@ -4,14 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Lock, Trash2, Loader2 } from "lucide-react";
-import { startTransition, useActionState } from "react";
-//import { updatePassword, deleteAccount } from "@/app/(login)/actions";
-
-type ActionState = {
-  error?: string;
-  success?: string;
-};
+import { startTransition } from "react";
 
 export default function SecurityPage() {
   //const [passwordState, passwordAction, isPasswordPending] = useActionState<
@@ -24,21 +17,21 @@ export default function SecurityPage() {
   //  FormData
   //>(deleteAccount, { error: '', success: '' });
   //
-  const handlePasswordSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-    // If you call the Server Action directly, it will automatically
-    // reset the form. We don't want that here, because we want to keep the
-    // client-side values in the inputs. So instead, we use an event handler
-    // which calls the action. You must wrap direct calls with startTransition.
-    // When you use the `action` prop it automatically handles that for you.
-    // Another option here is to persist the values to local storage. I might
-    // explore alternative options.
-    startTransition(() => {
-      //passwordAction(new FormData(event.currentTarget));
-    });
-  };
+  //const handlePasswordSubmit = async (
+  //  event: React.FormEvent<HTMLFormElement>
+  //) => {
+  //  event.preventDefault();
+  //  // If you call the Server Action directly, it will automatically
+  //  // reset the form. We don't want that here, because we want to keep the
+  //  // client-side values in the inputs. So instead, we use an event handler
+  //  // which calls the action. You must wrap direct calls with startTransition.
+  //  // When you use the `action` prop it automatically handles that for you.
+  //  // Another option here is to persist the values to local storage. I might
+  //  // explore alternative options.
+  //  startTransition(() => {
+  //    //passwordAction(new FormData(event.currentTarget));
+  //  });
+  //};
 
   const handleDeleteSubmit = async (
     event: React.FormEvent<HTMLFormElement>

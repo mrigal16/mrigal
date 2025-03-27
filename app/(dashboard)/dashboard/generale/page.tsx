@@ -1,43 +1,18 @@
 "use client";
 
-import { startTransition, use, useActionState, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
-import { useUser } from "@/lib/context";
-import { useSession } from "@/lib/auth-client";
 
-type ActionState = {
-  error?: string;
-  success?: string;
-};
+import { useSession } from "@/lib/auth-client";
 
 export default function GeneralPage() {
   //const { userPromise } = useUser();
   //const user = use(userPromise);
   const { data: session } = useSession();
   const user = session?.user;
-  const [isPending, setpending] = useState(false);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // If you call the Server Action directly, it will automatically
-    // reset the form. We don't want that here, because we want to keep the
-    // client-side values in the inputs. So instead, we use an event handler
-    // which calls the action. You must wrap direct calls with startTransition.
-    // When you use the `action` prop it automatically handles that for you.
-    // Another option here is to persist the values to local storage. I might
-    // explore alternative options.
-    startTransition(() => {
-      // formAction(new FormData(event.currentTarget));
-    });
-  };
 
   return (
     <>
-      {console.log(user)}
       <section className="flex-1 p-4 lg:p-8">
         <Card>
           <CardHeader>
@@ -47,7 +22,7 @@ export default function GeneralPage() {
           </CardHeader>
           <CardContent>
             <div>
-              <Label>Nom complet </Label>
+              <Label>Nom complet{user?.name} </Label>
             </div>
           </CardContent>
         </Card>

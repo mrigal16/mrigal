@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { use, useState, Suspense, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Home, LogOut } from "lucide-react";
 import {
@@ -11,8 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient, useSession } from "@/lib/auth-client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useUser } from "@/lib/context";
+
 //import { signOut } from "@/app/(login)/actions";
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
@@ -99,9 +98,8 @@ export function Header() {
   );
 }
 import digit from "../../components/imgs/digit.png";
-import tiktok from "../../components/imgs/tiktok.svg";
 import { SocialIcon } from "react-social-icons";
-import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 export function Footer() {
   return (
     <footer className="bg-white text-white">

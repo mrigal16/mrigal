@@ -1,14 +1,13 @@
 "use server";
 
 import { z } from "zod";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "@/db/drizzle";
 
 import { validatedAction, validatedActionWithUser } from "@/lib/middelware";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { facturesTable, user } from "@/db/schema";
-import { headers } from "next/headers";
 
 //async function logActivity(
 //  teamId: number | null | undefined,

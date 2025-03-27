@@ -16,15 +16,13 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, LoaderCircle } from "lucide-react";
-import { signIn, signUp } from "./actions";
+import { LoaderCircle } from "lucide-react";
+import { signIn } from "./actions";
 import { ActionState } from "@/lib/middelware";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,

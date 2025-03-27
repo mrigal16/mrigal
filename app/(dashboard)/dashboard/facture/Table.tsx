@@ -2,7 +2,6 @@
 import React from "react";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react"; //import moment from "moment";
 import {
-  Column,
   ColumnDef,
   useReactTable,
   getCoreRowModel,
