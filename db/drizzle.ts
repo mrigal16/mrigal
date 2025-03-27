@@ -3,4 +3,4 @@ import { drizzle } from "drizzle-orm/postgres-js";
 
 config({ path: ".env" }); // or .env.local
 
-export const db = drizzle(process.env.POSTGRES_URL!);
+export const db = drizzle(process.env.DATABASE_URL!);
