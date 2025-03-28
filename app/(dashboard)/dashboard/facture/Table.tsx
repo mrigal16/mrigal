@@ -36,6 +36,7 @@ import {
   DataTableToolbar,
 } from "./DataTable";
 import { Badge } from "@/components/ui/badge";
+import { format } from "date-fns";
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value);
@@ -89,6 +90,9 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
             sortingFn: fuzzySort,
             header: ({ column }) => (
               <DataTableColumnHeader column={column} title="Date" />
+            ),
+            cell: (props) => (
+              <p>{format(props.cell.getValue(), "yyyy-MM-dd")}</p>
             ),
             footer: (props) => props.column.id,
           },

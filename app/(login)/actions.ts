@@ -173,7 +173,7 @@ export const inviteTeamMember = validatedActionWithUser(
     }
     // Create a new invitation
     await db.insert(facturesTable).values({
-      utiliateurId: user.username,
+      utiliateurId: user.id,
       montant,
       num_avis,
       livreurNom: 1,

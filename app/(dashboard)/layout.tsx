@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, Suspense } from "react";
+import { useState, Suspense, use } from "react";
 import { Button } from "@/components/ui/button";
 import { Home, LogOut } from "lucide-react";
 import {
@@ -18,12 +18,12 @@ import Image from "next/image";
 
 function UserMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { userPromise } = useUser();
-  // const user = use(userPromise);
-  const { data: session } = useSession();
+  const { userPromise } = useUser();
+  const user = use(userPromise);
+  //const { data: session } = useSession();
   const router = useRouter();
 
-  if (!session) {
+  if (!user) {
     return (
       <>
         <Button
@@ -45,8 +45,8 @@ function UserMenu() {
   return (
     <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <DropdownMenuTrigger>
-        <div className="cursor-pointer size-9">
-          <p>{session?.user.name} </p>
+        <div className="cursor-pointer ">
+          <p>{user.name} </p>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="flex flex-col gap-1">
@@ -100,6 +100,7 @@ export function Header() {
 import digit from "../../components/imgs/digit.png";
 import { SocialIcon } from "react-social-icons";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { useUser } from "@/lib/context";
 export function Footer() {
   return (
     <footer className="bg-white text-white">

@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { addDays, format } from "date-fns";
 
 import { useSession } from "@/lib/auth-client";
 import { useUser } from "@/lib/context";
@@ -21,7 +22,6 @@ export default function GeneralPage() {
 
   return (
     <>
-      {console.log(user?.createdAt)}
       <section className="flex-1 p-4 lg:p-8">
         <Card className="w-full max-w-3xl mx-auto">
           <CardHeader className="pb-4">
@@ -89,9 +89,11 @@ export default function GeneralPage() {
                   <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
-                      Location
+                      Adresse
                     </p>
-                    <p className="text-sm">{user?.adresse}</p>
+                    <span className="text-sm">{user?.adresse}</span>,
+                    <span>{user?.commune},</span>
+                    {user?.ilot}
                   </div>
                 </div>
 
@@ -99,9 +101,13 @@ export default function GeneralPage() {
                   <Calendar className="h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
-                      Joined
+                      Date D'insecription
                     </p>
-                    <p className="text-sm"></p>
+                    <p className="text-sm">
+                      {user?.createdAt
+                        ? format(user.createdAt, "yyyy-MM-dd")
+                        : ""}
+                    </p>
                   </div>
                 </div>
               </div>
