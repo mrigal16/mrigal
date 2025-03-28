@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, Suspense, use } from "react";
 import { Button } from "@/components/ui/button";
-import { Home, LogOut } from "lucide-react";
+import { Book, Home, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -153,7 +153,7 @@ export function Footer() {
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 mt-0.5  text-black" />
-                <span className="text-black">Whatsapp: 0775 96 96 42</span>
+                <span className="text-black">WhatsApp: 0775 96 96 42</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2 mt-0.5  text-black" />
@@ -176,6 +176,7 @@ export function Footer() {
               >
                 Mentions légales
               </Link>
+
               <Link
                 href="/politique-de-confidentialite"
                 className="text-black text-sm hover:text-primary transition-colors"
@@ -191,5 +192,9 @@ export function Footer() {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <section className="flex flex-col min-h-screen">{children}</section>;
+  return (
+    <section className="flex flex-col min-h-screen">
+      {children} <Footer />
+    </section>
+  );
 }

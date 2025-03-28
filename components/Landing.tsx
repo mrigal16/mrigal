@@ -148,9 +148,7 @@ export default function BackgroundPaths({
           </div>
         </motion.div>
       </div>
-      <div className="pt-26">
-        <Footer />
-      </div>
+      <div className="pb-26"></div>
     </div>
   );
 }
