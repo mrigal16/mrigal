@@ -36,7 +36,7 @@ function UserMenu() {
           asChild
           className="bg-black hover:bg-gray-800 text-white text-sm px-4 py-2 rounded-full"
         >
-          <Link href="/sign-up">Inscrire</Link>
+          <Link href="/sign-up">Inscription</Link>
         </Button>
       </>
     );
@@ -104,15 +104,15 @@ export function Footer() {
   return (
     <footer className="bg-white text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-16">
           {/* Company Info */}
-          <div>
+          <div className="md:col-span-2">
             <h3 className="text-xl font-bold mb-4">
               <Image src={digit} alt="DigitServZ" />
             </h3>
             <p className="text-black mb-6 text-start line-clamp-3">
-              Mrigal Nous fournissons des services et des produits exceptionnels
-              pour répondre à tous vos besoins.
+              DigitservZ Nous fournissons des services exceptionnels pour
+              répondre à tous vos besoins.
             </p>
             <div className="flex space-x-4">
               <SocialIcon
@@ -140,23 +140,21 @@ export function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-2 mt-0.5  text-black" />
                 <span className="text-black">
-                  123 Business Street, Suite 100
+                  ANPT,incubateur,Sidi-Abdellah
                   <br />
-                  City, State 12345
+                  Rahmania,Alger
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 mt-0.5  text-black" />
-                <span className="text-black">Whatsapp: 07446546132</span>
+                <span className="text-black">Whatsapp: 0775 96 96 42</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2 mt-0.5  text-black" />
-                <span className="text-black">info@companyname.com</span>
+                <span className="text-black">mrigal.digitservz@gmail.com</span>
               </li>
             </ul>
           </div>
-
-          {/* Quick Links */}
         </div>
 
         {/* Legal Section */}
@@ -187,11 +185,5 @@ export function Footer() {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <section className="flex flex-col min-h-screen">
-      <Header />
-      {children}
-      <Footer />
-    </section>
-  );
+  return <section className="flex flex-col min-h-screen">{children}</section>;
 }
