@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { db } from "@/db/drizzle";
 
 import { validatedAction, validatedActionWithUser } from "@/lib/middelware";
@@ -113,7 +113,6 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { name, email, commune, ilot, phone, adresse, username, password } =
     data;
   await auth.api.signUpEmail({
-    returnHeaders: true,
     body: {
       email,
       password,
@@ -124,19 +123,16 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
       adresse,
       username,
     },
-
+    callbackURL: "/",
     onError: (ctx: any) => {
       // Handle the error
-      if (ctx.error.status === 403) {
-        alert("Please verify your email address");
-      }
+
       //you can also show the original error message
       alert(ctx.error.message);
     },
-
-    //
-    //  const redirectTo = formData.get("redirect") as string | null;
-    //  console.log("cre");
+    onSuccess: (ctx: any) => {
+      console.log("cre");
+    },
   });
 
   redirect("/verification");

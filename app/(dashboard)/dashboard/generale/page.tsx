@@ -1,28 +1,110 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
 import { useSession } from "@/lib/auth-client";
+import { useUser } from "@/lib/context";
+import { Briefcase, Calendar, Mail, MapPin, Phone, User } from "lucide-react";
+import { use } from "react";
 
 export default function GeneralPage() {
-  //const { userPromise } = useUser();
-  //const user = use(userPromise);
-  const { data: session } = useSession();
-  const user = session?.user;
+  const { userPromise } = useUser();
+  const user = use(userPromise);
 
   return (
     <>
+      {console.log(user?.createdAt)}
       <section className="flex-1 p-4 lg:p-8">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-              Account Information
-            </CardTitle>
+        <Card className="w-full max-w-3xl mx-auto">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              <div className="space-y-1">
+                <CardTitle className="text-2xl">{user?.name}</CardTitle>
+                <CardDescription className="flex items-center gap-2">
+                  <Badge variant="outline" className="font-normal">
+                    {user?.username}
+                  </Badge>
+                  <Badge variant="secondary" className="font-normal">
+                    Utilisateur
+                  </Badge>
+                </CardDescription>
+              </div>
+            </div>
           </CardHeader>
-          <CardContent>
-            <div>
-              <Label>Nom complet{user?.name} </Label>
+
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Mail className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Email
+                    </p>
+                    <p className="text-sm">{user?.email}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Phone className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Phone
+                    </p>
+                    <p className="text-sm">{user?.phone}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Briefcase className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Client Code
+                    </p>
+                    <p className="text-sm">{user?.username}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <User className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Role
+                    </p>
+                    <p className="text-sm">{"Utilisateur"}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Location
+                    </p>
+                    <p className="text-sm">{user?.adresse}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Calendar className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Joined
+                    </p>
+                    <p className="text-sm"></p>
+                  </div>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

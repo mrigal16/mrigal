@@ -358,7 +358,7 @@ export function SignUpFuc() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Mot de Passe </FormLabel>
                   <FormControl>
                     <Input
                       id="password"
@@ -371,7 +371,7 @@ export function SignUpFuc() {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>Enter your password</FormDescription>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -424,9 +424,6 @@ export function SignUpFuc() {
                 "Connecter"
               )}
             </Button>
-            <div className="mt-4 text-left text-sm text-gray-600 hover:underline hover:underline-offset-1">
-              <Link href="/forget-password">Oublie mot de passe ? </Link>
-            </div>
 
             {/* Show error messages from server */}
             <p

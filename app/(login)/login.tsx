@@ -1,17 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  startTransition,
-  useActionState,
-  useEffect,
-  useRef,
-} from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

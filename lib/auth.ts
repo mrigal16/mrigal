@@ -22,15 +22,15 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 20,
     requireEmailVerification: true,
-    autoSignInAfterVerification: true,
   },
   emailVerification: {
+    autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url, token }, request) => {
       await transporter.sendMail({
         from: '"DigitservZ"<mrigal.digitservz@gmail.com>',
         to: user.email,
         subject: "Vérifiez votre adresse e-mail",
-        html: `Click the link to verify your email: ${url}`,
+        html: `Click the link to verify your email: <a href="${url}">${url}</a>`,
       });
     },
     sendResetPassword: async ({
