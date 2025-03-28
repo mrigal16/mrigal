@@ -66,7 +66,7 @@ export default function BackgroundPaths({
         <FloatingPaths position={-1} />
       </div>
 
-      <div className="  z-10 container mx-auto px-4 md:px-6 text-center">
+      <div className="pt-30  z-10 container mx-auto px-4 md:px-6 text-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -148,7 +148,7 @@ export default function BackgroundPaths({
           </div>
         </motion.div>
       </div>
-      <div className="">
+      <div className="pt-26">
         <Footer />
       </div>
     </div>
