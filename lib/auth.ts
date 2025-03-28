@@ -66,19 +66,27 @@ export const auth = betterAuth({
         type: "string",
       },
     },
+    changeEmail: {
+      enabled: true,
+    },
+    deleteUser: {
+      enabled: true,
+    },
   },
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: schema,
   }),
   session: {
-    expiresIn: 60 * 60 * 24 * 1, // 7 days
+    expiresIn: 60 * 60 * 24 * 1, // 1 days
     updateAge: 60 * 60 * 24, // 1 day (every 1 day the session expiration is updated)
     freshAge: 60 * 5, // 5 minutes (the session is fresh if created within the last 5 minutes)
-    //cookieCache: {
-    //  enabled: true,
-    //  maxAge: 5 * 60, // Cache duration in seconds
-    //},
+
+    cookieCache: {
+      enabled: true,
+      maxAge: 60 * 5, // 5 minutes
+    },
   },
+
   plugins: [nextCookies(), username()],
 });

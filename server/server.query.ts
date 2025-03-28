@@ -2,11 +2,13 @@ import { db } from "@/db/drizzle";
 import { facturesTable, livreurTable } from "@/db/schema";
 import { getUser } from "@/lib/plugin";
 import { and, eq, desc, isNull } from "drizzle-orm";
+import { redirect } from "next/navigation";
 
 export async function getActivityLogs() {
   const user = await getUser();
   if (!user) {
-    throw new Error("User not authenticated");
+    //throw new Error("User not authenticated");
+    redirect("/");
   }
   const FacturesUser = await db
     .select({

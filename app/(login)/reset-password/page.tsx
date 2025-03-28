@@ -81,7 +81,7 @@ const ResetPassword = () => {
   return (
     <Card className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
       <CardTitle className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Forgot Password
+        Réinitialiser le mot de passe
       </CardTitle>
       <CardDescription className="mt-8 text-center sm:mx-auto sm:w-full sm:max-w-md">
         Enter your email to send link to reset password

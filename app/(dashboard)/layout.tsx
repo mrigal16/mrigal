@@ -34,7 +34,12 @@ function UserMenu() {
         </Button>
         <Button
           asChild
-          className="bg-black hover:bg-gray-800 text-white text-sm px-4 py-2 rounded-full"
+          variant="ghost"
+          className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
+                            bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
+                            text-black dark:text-white transition-all duration-300 
+                            group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
+                            hover:shadow-md dark:hover:shadow-neutral-800/50"
         >
           <Link href="/sign-up">Inscription</Link>
         </Button>
@@ -63,7 +68,7 @@ function UserMenu() {
               fetchOptions: {
                 onSuccess: () => {
                   router.refresh();
-                  router.push("/login");
+                  router.push("/");
                   redirect("/"); // redirect to login page
                 },
               },

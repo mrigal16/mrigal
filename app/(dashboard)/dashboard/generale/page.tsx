@@ -15,11 +15,15 @@ import { useSession } from "@/lib/auth-client";
 import { useUser } from "@/lib/context";
 import { Briefcase, Calendar, Mail, MapPin, Phone, User } from "lucide-react";
 import { use } from "react";
+import { redirect } from "next/navigation";
+import { getUser } from "@/lib/plugin";
 
 export default function GeneralPage() {
   const { userPromise } = useUser();
   const user = use(userPromise);
-
+  if (!user) {
+    redirect("/");
+  }
   return (
     <>
       <section className="flex-1 p-4 lg:p-8">

@@ -70,7 +70,7 @@ const ForgotPassword = () => {
   return (
     <Card className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
       <CardTitle className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Forgot Password
+        Oublié mot de passe
       </CardTitle>
       <CardDescription className="mt-8 text-center sm:mx-auto sm:w-full sm:max-w-md">
         Entrez votre email pour envoyer le lien de réinitialisation du mot de

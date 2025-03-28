@@ -1,164 +1,163 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
-import { Button } from "@/components/ui/button";
+import { toast, Toaster } from "sonner";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { Loader2, LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { startTransition } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { authClient, changePassword } from "@/lib/auth-client";
+import { boolean, object, string } from "zod";
+import { Button } from "@/components/ui/button";
 
-export default function SecurityPage() {
-  //const [passwordState, passwordAction, isPasswordPending] = useActionState<
-  //  ActionState,
-  //  FormData
-  //>(updatePassword, { error: '', success: '' });
-  //
-  //const [deleteState, deleteAction, isDeletePending] = useActionState<
-  //  ActionState,
-  //  FormData
-  //>(deleteAccount, { error: '', success: '' });
-  //
-  //const handlePasswordSubmit = async (
-  //  event: React.FormEvent<HTMLFormElement>
-  //) => {
-  //  event.preventDefault();
-  //  // If you call the Server Action directly, it will automatically
-  //  // reset the form. We don't want that here, because we want to keep the
-  //  // client-side values in the inputs. So instead, we use an event handler
-  //  // which calls the action. You must wrap direct calls with startTransition.
-  //  // When you use the `action` prop it automatically handles that for you.
-  //  // Another option here is to persist the values to local storage. I might
-  //  // explore alternative options.
-  //  startTransition(() => {
-  //    //passwordAction(new FormData(event.currentTarget));
-  //  });
-  //};
+export default function UserPasswordForm() {
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const getPasswordSchema = (
+    type: "password" | "confirmPassword" | "currentPassword"
+  ) =>
+    string({ required_error: `${type} is required` })
+      .min(8, `${type} must be atleast 8 characters`)
+      .max(32, `${type} can not exceed 32 characters`);
+  const getRevokeOtherSessionsSchema = () => boolean().optional();
+  const updatePasswordSchema = object({
+    revokeOtherSessions: getRevokeOtherSessionsSchema(),
+    currentPassword: getPasswordSchema("currentPassword"),
+    password: getPasswordSchema("password"),
+    confirmPassword: getPasswordSchema("confirmPassword"),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+  const form = useForm<z.infer<typeof updatePasswordSchema>>({
+    resolver: zodResolver(updatePasswordSchema),
+    defaultValues: {
+      currentPassword: "",
+      password: "",
+      confirmPassword: "",
+      revokeOtherSessions: true,
+    },
+  });
+  const { isDirty } = form.formState;
 
-  const handleDeleteSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-    startTransition(() => {
-      //  deleteAction(new FormData(event.currentTarget));
+  function onSubmit(values: z.infer<typeof updatePasswordSchema>) {
+    startTransition(async () => {
+      await authClient.changePassword(
+        {
+          newPassword: values.password,
+          currentPassword: values.currentPassword,
+          revokeOtherSessions: values.revokeOtherSessions,
+        },
+        {
+          onRequest: () => {
+            toast.loading("Mise à jour ...", {
+              id: "updatePasswordToast",
+            });
+          },
+          onSuccess: () => {
+            toast.success("Mot de passe mis à jour avec succès", {
+              id: "updatePasswordToast",
+            });
+            form.reset();
+            router.refresh();
+          },
+          onError: (ctx) => {
+            toast.error(ctx.error.message ?? "Something went wrong.", {
+              id: "updatePasswordToast",
+            });
+            console.log("error", ctx);
+          },
+        }
+      );
     });
-  };
+  }
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium bold text-gray-900 mb-6">
-        Security Settings
-      </h1>
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Password</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form className="space-y-4">
-            <div>
-              <Label htmlFor="current-password">Current Password</Label>
-              <Input
-                id="current-password"
-                name="currentPassword"
-                type="password"
-                autoComplete="current-password"
-                required
-                minLength={8}
-                maxLength={100}
-              />
-            </div>
-            <div>
-              <Label htmlFor="new-password">New Password</Label>
-              <Input
-                id="new-password"
-                name="newPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={8}
-                maxLength={100}
-              />
-            </div>
-            <div>
-              <Label htmlFor="confirm-password">Confirm New Password</Label>
-              <Input
-                id="confirm-password"
-                name="confirmPassword"
-                type="password"
-                required
-                minLength={8}
-                maxLength={100}
-              />
-            </div>
-            {/*passwordState.error && (
-              <p className="text-red-500 text-sm">{passwordState.error}</p>
+    <section>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="currentPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Current password</FormLabel>
+                <FormControl>
+                  <Input type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
-            {passwordState.success && (
-              <p className="text-green-500 text-sm">{passwordState.success}</p>
-            )*/}
-            <Button
-              type="submit"
-              className="bg-orange-500 hover:bg-orange-600 text-white"
-              disabled={false}
-            >
-              {/*isPasswordPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Updating...
-                </>
-              ) : (
-                <>
-                  <Lock className="mr-2 h-4 w-4" />
-                  Update Password
-                </>
-              )*/}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Delete Account</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-gray-500 mb-4">
-            Account deletion is non-reversable. Please proceed with caution.
-          </p>
-          <form onSubmit={handleDeleteSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="delete-password">Confirm Password</Label>
-              <Input
-                id="delete-password"
-                name="password"
-                type="password"
-                required
-                minLength={8}
-                maxLength={100}
-              />
-            </div>
-            {/*deleteState.error && (
-              <p className="text-red-500 text-sm">{deleteState.error}</p>
-            )*/}
-            <Button
-              type="submit"
-              variant="destructive"
-              className="bg-red-600 hover:bg-red-700"
-              disabled={false}
-            >
-              {/*isDeletePending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Deleting...
-                </>
-              ) : (
-                <>
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete Account
-                </>
-              )*/}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>New password</FormLabel>
+                <FormControl>
+                  <Input type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm password</FormLabel>
+                <FormControl>
+                  <Input type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="revokeOtherSessions"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>Revoke all other sessions</FormLabel>
+                  <FormDescription>
+                    This will sign you out from all other devices and sessions
+                    except the current one.
+                  </FormDescription>
+                </div>
+              </FormItem>
+            )}
+          />
+          <Button disabled={!isDirty}>
+            {isPending ? (
+              <LoaderCircle className="animate-spin" />
+            ) : (
+              "Mettre à jour le mot de passe"
+            )}
+          </Button>
+        </form>
+      </Form>
+      <Toaster />
     </section>
   );
 }
