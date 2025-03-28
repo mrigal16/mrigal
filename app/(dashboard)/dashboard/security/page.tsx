@@ -21,6 +21,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { authClient, changePassword } from "@/lib/auth-client";
 import { boolean, object, string } from "zod";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function UserPasswordForm() {
   const [isPending, startTransition] = useTransition();
@@ -85,78 +86,85 @@ export default function UserPasswordForm() {
   }
 
   return (
-    <section>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="currentPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Current password</FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>New password</FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm password</FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="revokeOtherSessions"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>Revoke all other sessions</FormLabel>
-                  <FormDescription>
-                    This will sign you out from all other devices and sessions
-                    except the current one.
-                  </FormDescription>
-                </div>
-              </FormItem>
-            )}
-          />
-          <Button disabled={!isDirty}>
-            {isPending ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              "Mettre à jour le mot de passe"
-            )}
-          </Button>
-        </form>
-      </Form>
+    <section className="flex-1 p-4 lg:p-8">
+      <Card className="mt-8">
+        <CardHeader>
+          <CardTitle>Changer mot de Passe </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="currentPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mot de Passe</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nouveau mot de passe</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirmer le mot de passe</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="revokeOtherSessions"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>Révoquer toutes les autres sessions</FormLabel>
+                      <FormDescription>
+                        Cela vous déconnectera de tous les autres appareils et
+                        sessions à l'exception de celle-ci.
+                      </FormDescription>
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <Button disabled={!isDirty}>
+                {isPending ? (
+                  <LoaderCircle className="animate-spin" />
+                ) : (
+                  "Mettre à jour le mot de passe"
+                )}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
       <Toaster />
     </section>
   );
