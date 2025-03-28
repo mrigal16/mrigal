@@ -78,7 +78,7 @@ function UserMenu() {
         >
           <DropdownMenuItem className="w-full flex-1 cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
-            <span>Sign out</span>
+            <span>Déconnexion</span>
           </DropdownMenuItem>
         </button>
       </DropdownMenuContent>
