@@ -1,8 +1,40 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
+import img from "@/components/imgs/mrigal.png";
+import Image from "next/image";
 
 const Politique = () => {
   return (
     <section className="m-4">
+      <header className="border-b border-gray-200 mb-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <Link href="/" className="flex items-center">
+            <Image src={img} alt="My logo" />
+          </Link>
+          <div className="flex items-center space-x-4">
+            <nav>
+              <Button
+                asChild
+                className="bg-black hover:bg-gray-800 text-white text-sm px-4 py-2 rounded-full"
+              >
+                <Link href="/sign-in">Connexion</Link>
+              </Button>
+              <Button
+                asChild
+                variant="ghost"
+                className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
+                            bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
+                            text-black dark:text-white transition-all duration-300 
+                            group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
+                            hover:shadow-md dark:hover:shadow-neutral-800/50"
+              >
+                <Link href="/sign-up">Inscription</Link>
+              </Button>
+            </nav>
+          </div>
+        </div>
+      </header>
       <h1 className="text-xl font-bold">
         Politique de Confidentialité et Mentions Légales
       </h1>
