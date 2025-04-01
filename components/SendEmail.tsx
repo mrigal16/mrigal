@@ -20,13 +20,13 @@ const SendEmail = async ({
     port: 587,
     secure: false, // true for port 465, false for other ports
     auth: {
-      user: "mrigal.digitservz@gmail.com",
+      user: "mrigal.digitservz16@gmail.com",
       pass: "kdgh jfnb vlfv ptew",
     },
   });
 
   const info = transporter.sendMail({
-    from: '"DigitservZ"<mrigal.digitservz@gmail.com>', // sender address
+    from: '"DigitservZ"<mrigal.digitservz16@gmail.com>', // sender address
     to: [to], // list of receivers
     subject: "Mrigal", // Subject line
     text: "Inscription dans le service Mrigal", // plain text body
@@ -47,7 +47,7 @@ const SendEmail = async ({
           <p style="font-size: 110%;">Vous êtes inscrit avec succès sur notre plateforme Mrigal </p>
           </div>
           <div>
-          <p>Pour plus d'information contact nous sur notre numéro téléphone : 0775 96 96 42 </p>
+          <p>Pour plus d'informations, contactez-nous au numéro de téléphone : 0775 96 96 42</p>
           </div>
           <div>
           <p>appuyer sur le lien pour accéder à notre site web : <a href="http://localhost:3000">${text}</a></p>

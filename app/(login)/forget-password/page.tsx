@@ -100,7 +100,7 @@ const ForgotPassword = () => {
           />
           {error && <FormMessage>{error}</FormMessage>}
           <Button disabled={loading} type="submit" className="w-full">
-            Submit
+            Envoyer
           </Button>
         </form>
       </Form>

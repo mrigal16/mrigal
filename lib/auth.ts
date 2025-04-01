@@ -5,14 +5,18 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { username } from "better-auth/plugins";
 import nodemailer from "nodemailer";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for port 465, false for other ports
   auth: {
-    user: "mrigal.digitservz@gmail.com",
-    pass: "kdgh jfnb vlfv ptew",
+    user: "mrigal.digitservz16@gmail.com",
+    pass: "jtpf xbha jubt gbtp",
   },
 });
 export const auth = betterAuth({
@@ -22,6 +26,43 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 20,
     requireEmailVerification: true,
+    sendResetPassword: async ({ user, url }) => {
+      await transporter.sendMail({
+        to: user.email,
+        subject: "Réinitialisez votre mot de passe",
+        html: `<!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          </head>
+          <body>
+          <div>
+            <div>
+            <img src="cid:uniqueImageCID" alt="Mrigal"/>
+            <h1>Bonjour !</h1>
+            </div>
+            <div>
+            <p style="font-size: 110%;">Vous avez demandé à réinitialiser votre mot de passe sur notre plateforme Mrigal</p>
+            </div>
+            <div>
+            <p>Si vous avez demandé à réinitialiser votre mot de passe, veuillez nous contacter au numéro : 0775 96 96 42</p>
+            </div>
+            <div>
+            <p>Cliquez sur le lien pour réinitialiser votre mot de passe : ${url}</p>
+            </div>
+          </body>
+        </html>`,
+        attachments: [
+          {
+            filename: "mrigal.png",
+            path: __dirname + "/imgs/mrigal.png",
+            cid: "uniqueImageCID",
+          },
+        ],
+      });
+    },
   },
   emailVerification: {
     autoSignInAfterVerification: true,
@@ -30,21 +71,37 @@ export const auth = betterAuth({
         from: '"DigitservZ"<mrigal.digitservz@gmail.com>',
         to: user.email,
         subject: "Vérifiez votre adresse e-mail",
-        html: `Click the link to verify your email: <a href="${url}">${url}</a>`,
-      });
-    },
-    sendResetPassword: async ({
-      user,
-      url,
-    }: {
-      user: User;
-      url: string;
-      token?: string;
-    }) => {
-      await transporter.sendMail({
-        to: user.email,
-        subject: "Réinitialisez votre mot de passe",
-        text: `Cliquez sur le lien pour réinitialiser votre mot de passe : ${url}`,
+        html: `<!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          </head>
+          <body>
+          <div>
+            <div>
+            <img src="cid:uniqueImageCID" alt="Mrigal"/>
+            <h1>Bonjour !</h1>
+            </div>
+            <div>
+            <p style="font-size: 110%;">Vous êtes inscrit avec succès sur notre plateforme Mrigal </p>
+            </div>
+            <div>
+            <p>Pour plus d'information contact nous sur notre numéro téléphone : 0775 96 96 42 </p>
+            </div>
+            <div>
+            <p>appuyer sur le lien pour accéder à notre site web : ${url}</p>
+            </div>
+          </body>
+        </html>`,
+        attachments: [
+          {
+            filename: "logo.png",
+            path: __dirname + "/components/imgs/mrigal.png",
+            cid: "uniqueImageCID",
+          },
+        ],
       });
     },
   },
