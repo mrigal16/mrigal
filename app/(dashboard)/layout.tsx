@@ -123,17 +123,17 @@ export function Footer() {
             <div className="flex space-x-4">
               <SocialIcon
                 network="tiktok"
-                url="https://react-social-icons.com"
+                url="https://www.tiktok.com/@mrigal68?_t=ZM-8v2dmkFRkd4&_r=1"
                 style={{ height: 30, width: 30 }}
               />
               <SocialIcon
                 network="instagram"
-                url="https://react-social-icons.com"
+                url="https://www.instagram.com/mrigal.dz_16/"
                 style={{ height: 30, width: 30 }}
               />
               <SocialIcon
                 network="facebook"
-                url="https://react-social-icons.com"
+                url="https://web.facebook.com/profile.php?id=61574467266238"
                 style={{ height: 30, width: 30 }}
               />
             </div>
