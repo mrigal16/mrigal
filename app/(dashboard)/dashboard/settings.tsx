@@ -13,9 +13,7 @@ export function Settings() {
         <CardHeader>
           <CardTitle>Factures</CardTitle>
         </CardHeader>
-        <CardContent>
-          <InviteTeamMember />
-        </CardContent>
+        <CardContent></CardContent>
       </Card>
       <Toaster />
     </section>

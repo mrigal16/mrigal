@@ -1,7 +1,6 @@
-import { redirect } from "next/navigation";
-
 import { getUser } from "@/lib/plugin";
-import ActivityPage from "./facture/page";
+import ActivityPage from "./factures/page";
+import { redirect } from "next/navigation";
 
 export default async function SettingsPage() {
   const user = await getUser();

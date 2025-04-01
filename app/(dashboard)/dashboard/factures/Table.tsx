@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react"; //import moment from "moment";
 import {
   ColumnDef,
@@ -37,6 +37,8 @@ import {
 } from "./DataTable";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
+import { useUser } from "@/lib/context";
+import FetchInvoice from "@/components/fetch";
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value);
@@ -65,6 +67,8 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
 };
 const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
   const [data, setData] = useState<any>(FacturesQuery);
+  const { userPromise } = useUser();
+  const Session = use(userPromise);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const columns: any = useMemo<ColumnDef<any>[]>(
@@ -139,6 +143,17 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
                 {""}
                 <span className="gap-1">DA</span>
               </p>
+            ),
+            footer: (props) => props.column.id,
+          },
+          {
+            accessorFn: (row) => row.Action,
+            id: "action",
+            filterFn: "fuzzy",
+            sortingFn: fuzzySort,
+            header: () => <p>Action</p>,
+            cell: () => (
+              <FetchInvoice invoiceId={Session?.id || "default-id"} />
             ),
             footer: (props) => props.column.id,
           },

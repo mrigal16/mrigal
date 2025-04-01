@@ -1,10 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getActivityLogs } from "@/server/server.query";
 import { AlertCircle } from "lucide-react";
 import Facture_Utilisatuer_Comp from "./Table";
-import { getActivityLogs } from "@/server/server.query";
+
+interface SessionUserType {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified: boolean;
+  commune: string;
+  ilot: string;
+  phone: string;
+  adresse: string;
+  username: string;
+  displayUsername: string | null;
+  createdAt: Date;
+}
 
 export default async function ActivityPage() {
   const factures = await getActivityLogs();
+
   return (
     <section className="flex-1 p-4 lg:p-8">
       <Card>

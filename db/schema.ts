@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth";
 import { relations, sql, SQL } from "drizzle-orm";
 import {
   AnyPgColumn,
@@ -8,6 +9,7 @@ import {
   pgEnum,
   pgPolicy,
   pgTable,
+  serial,
   text,
   timestamp,
   uniqueIndex,
@@ -39,6 +41,7 @@ export const lower = (email: AnyPgColumn): SQL => {
 };
 export type User = typeof user.$inferSelect;
 export type UserInsert = typeof user.$inferInsert;
+export type Session = typeof auth.$Infer.Session;
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
@@ -102,6 +105,14 @@ export const facturesTable = pgTable(
   },
   (table) => [check("montant", sql`${table.montant} > 0`)]
 );
+export const invoices = pgTable("invoices", {
+  id: serial("id").primaryKey(),
+  utiliateurId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  url: text("url").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
 export const UtilisateurRelation = relations(user, ({ many }) => ({
   factures_demander: many(facturesTable),
 }));
@@ -118,6 +129,12 @@ export const FacturesRelations = relations(facturesTable, ({ one }) => ({
     references: [livreurTable.nomComplet],
   }),
 }));
+export const invoicesRelations = relations(invoices, ({ one }) => ({
+  utilisateur: one(user, {
+    fields: [invoices.utiliateurId],
+    references: [user.id],
+  }),
+}));
 export const schema = {
   user,
   session,
@@ -125,4 +142,5 @@ export const schema = {
   verification,
   facturesTable,
   livreurTable,
+  invoices,
 };
