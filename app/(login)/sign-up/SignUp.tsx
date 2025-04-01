@@ -406,7 +406,7 @@ export function SignUpFuc() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Accepter les politique
+                  Accepter la politique de confidentialite
                 </Link>
               </label>
             </div>
