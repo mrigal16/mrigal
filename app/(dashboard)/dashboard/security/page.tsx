@@ -78,7 +78,6 @@ export default function UserPasswordForm() {
             toast.error(ctx.error.message ?? "Something went wrong.", {
               id: "updatePasswordToast",
             });
-            console.log("error", ctx);
           },
         }
       );

@@ -412,7 +412,6 @@ export function SignUpFuc() {
             </div>
             {/* Show pending state while submiting */}
             <Button
-              onClick={() => console.log(formSign)}
               type="submit"
               className="w-full flex justify-center items-center px-4 border border-transparent rounded-md
    shadow-sm text-sm font-medium text-white bg-black hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"

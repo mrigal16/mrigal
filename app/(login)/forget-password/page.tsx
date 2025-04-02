@@ -62,7 +62,7 @@ const ForgotPassword = () => {
       );
     } catch (error) {
       // catch the error
-      console.log(error);
+
       setError("Something went wrong");
     }
   };

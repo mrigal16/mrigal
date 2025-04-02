@@ -40,7 +40,6 @@ export const auth = betterAuth({
           <body>
           <div>
             <div>
-           
             <h1>Bonjour !</h1>
             </div>
             <div>

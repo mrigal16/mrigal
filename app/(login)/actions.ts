@@ -53,9 +53,7 @@ export const signIn = validatedAction(signInSchema, async (data, formData) => {
       //you can also show the original error message
       alert(ctx.error.message);
     },
-    onSuccess: (ctx: any) => {
-      console.log("cre");
-    },
+    onSuccess: (ctx: any) => {},
   });
   const redirectTo = formData.get("redirect") as string | null;
   if (userOne) {
