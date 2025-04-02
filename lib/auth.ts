@@ -88,6 +88,13 @@ export const auth = betterAuth({
             </div>
           </body>
         </html>`,
+        attachments: [
+          {
+            filename: "mrigal.png",
+            path: __dirname + "/components/imgs/mrigal.png",
+            cid: "uniqueImageCID",
+          },
+        ],
       });
     },
   },
