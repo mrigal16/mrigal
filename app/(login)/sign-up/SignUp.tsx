@@ -421,7 +421,7 @@ export function SignUpFuc() {
               {pending ? (
                 <LoaderCircle className="animate-spin" />
               ) : (
-                "Connecter"
+                "S'inscrire"
               )}
             </Button>
 
