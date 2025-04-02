@@ -40,7 +40,7 @@ export const auth = betterAuth({
           <body>
           <div>
             <div>
-            <img src="cid:uniqueImageCID" alt="Mrigal"/>
+           
             <h1>Bonjour !</h1>
             </div>
             <div>
@@ -74,7 +74,7 @@ export const auth = betterAuth({
           <body>
           <div>
             <div>
-            <img src="cid:uniqueImageCID" alt="Mrigal"/>
+          
             <h1>Bonjour !</h1>
             </div>
             <div>
@@ -88,13 +88,6 @@ export const auth = betterAuth({
             </div>
           </body>
         </html>`,
-        attachments: [
-          {
-            filename: "mrigal.png",
-            path: __dirname + "/components/imgs/mrigal.png",
-            cid: "uniqueImageCID",
-          },
-        ],
       });
     },
   },
