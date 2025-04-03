@@ -93,7 +93,7 @@ export function DataTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter..."
+          placeholder="Filtrer..."
           value={
             (table.getColumn("num_avis")?.getFilterValue() as string) ??
             (table.getColumn("date")?.getFilterValue() as string) ??
