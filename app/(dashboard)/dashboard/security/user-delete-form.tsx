@@ -14,7 +14,7 @@ import {
 import { Loader2, LoaderCircle, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { deleteUser } from "@/lib/auth-client";
+import { authClient, deleteUser } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Session } from "@/db/schema";
@@ -37,18 +37,15 @@ const UserDeleteForm = ({ session }: UserDeleteFormProps) => {
         });
         return;
       }
-      await deleteUser({
-        fetchOptions: {
-          onSuccess: () => {
-            toast.success("good ");
-            router.push("/");
-          },
-        },
-      }).catch((err) => {
-        toast.error(err.message ?? "Une erreur s'est produite.", {
-          id: "deleteAccountToast",
+      await authClient
+        .deleteUser({
+          callbackURL: "/goodbye", // you can
+        })
+        .catch((err) => {
+          toast.error(err.message ?? "Une erreur s'est produite.", {
+            id: "deleteAccountToast",
+          });
         });
-      });
     });
   }
   return (
