@@ -1,18 +1,20 @@
+"use client";
 import React, { Suspense } from "react";
 
 import UserPasswordForm from "./user-password-form";
 import { Loader2 } from "lucide-react";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import UserDeleteForm from "./user-delete-form";
 import { Session } from "@/db/schema";
 import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { headers } from "next/headers";
 
 export default async function PasswordAndSecurityPage() {
-  const { data: session } = authClient.useSession();
-
-  if (!session?.user) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (!session) {
     redirect("/");
   }
   return (
