@@ -68,7 +68,7 @@ function UserMenu() {
               fetchOptions: {
                 onSuccess: () => {
                   router.refresh();
-                  router.push("/");
+                  router.replace("/");
                   redirect("/"); // redirect to login page
                 },
               },
