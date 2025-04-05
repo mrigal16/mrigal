@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Settings, Shield, Activity, Menu } from "lucide-react";
 import { Header } from "../layout";
 import { authClient } from "@/lib/auth-client";
+import { useUser } from "@/lib/context";
 
 export default function DashboardLayout({
   children,
@@ -15,10 +16,12 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { data: session } = authClient.useSession();
+  const { userPromise } = useUser();
+  const user = use(userPromise);
+  //const { data: session } = useSession();
   const router = useRouter();
 
-  if (!session) {
+  if (!user) {
     router.replace("/");
     redirect("/");
   }
