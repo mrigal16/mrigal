@@ -42,6 +42,7 @@ export const lower = (email: AnyPgColumn): SQL => {
 export type User = typeof user.$inferSelect;
 export type UserInsert = typeof user.$inferInsert;
 export type Session = typeof auth.$Infer.Session;
+
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
