@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Settings, Shield, Activity, Menu } from "lucide-react";
 import { Header } from "../layout";
+import { authClient } from "@/lib/auth-client";
 
 export default function DashboardLayout({
   children,
@@ -14,7 +15,11 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { data: session } = authClient.useSession();
 
+  if (!session) {
+    redirect("/");
+  }
   const navItems = [
     { href: "/dashboard/factures", icon: Activity, label: "Factures" },
     { href: "/dashboard/generale", icon: Settings, label: "Générale" },

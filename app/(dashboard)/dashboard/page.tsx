@@ -1,7 +1,6 @@
 import { getUser } from "@/lib/plugin";
-import ActivityPage from "./factures/page";
+import ActivityPageContent from "./factures/page";
 import { redirect } from "next/navigation";
-
 export default async function SettingsPage() {
   const user = await getUser();
 
@@ -15,5 +14,5 @@ export default async function SettingsPage() {
   //   throw new Error('Team not found');
   // }
 
-  return <ActivityPage />;
+  return <ActivityPageContent />;
 }
