@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Settings, Shield, Activity, Menu } from "lucide-react";
 import { Header } from "../layout";
@@ -16,8 +16,10 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { data: session } = authClient.useSession();
+  const router = useRouter();
 
   if (!session) {
+    router.replace("/");
     redirect("/");
   }
   const navItems = [
