@@ -6,11 +6,15 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import UserDeleteForm from "./user-delete-form";
 import { Session } from "@/db/schema";
+import { redirect } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default async function PasswordAndSecurityPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const { data: session } = authClient.useSession();
+
+  if (!session?.user) {
+    redirect("/");
+  }
   return (
     <div className="mx-auto w-full max-w-screen-md px-4 py-8">
       <div className="grid gap-8">
