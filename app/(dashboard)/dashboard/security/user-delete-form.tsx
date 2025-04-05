@@ -15,7 +15,7 @@ import { Loader2, LoaderCircle, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { authClient, deleteUser } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Session } from "@/db/schema";
 interface UserDeleteFormProps {
@@ -39,7 +39,13 @@ const UserDeleteForm = ({ session }: UserDeleteFormProps) => {
       }
       await authClient
         .deleteUser({
-          callbackURL: "/goodbye", // you can
+          fetchOptions: {
+            onSuccess: () => {
+              toast.success("good ");
+              router.push("/");
+              redirect("/");
+            },
+          },
         })
         .catch((err) => {
           toast.error(err.message ?? "Une erreur s'est produite.", {
