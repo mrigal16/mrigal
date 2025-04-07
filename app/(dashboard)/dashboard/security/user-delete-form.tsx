@@ -55,46 +55,43 @@ const UserDeleteForm = ({ session }: UserDeleteFormProps) => {
     });
   }
   return (
-    <>
-      {console.log(session?.user.name)}
-      <Card className="mt-2">
-        <CardHeader>
-          <CardTitle className="text-red-500">Supprimer compte</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="destructive"
-                className=" cursor-pointer text-white"
+    <Card className="mt-2">
+      <CardHeader>
+        <CardTitle className="text-red-500">Supprimer compte</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="destructive"
+              className=" cursor-pointer text-white"
+            >
+              Supprimer votre compte
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Êtes-vous absolument sûr ?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Cette action ne peut pas être annulée. Cela supprimera
+                définitivement votre compte et effacera vos données de nos
+                serveurs.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction
+                className=" cursor-pointer w-full bg-destructive/90 hover:bg-destructive text-white"
+                onClick={onSubmit}
+                disabled={isPending || confirmation !== session?.user?.name}
               >
-                Supprimer votre compte
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Êtes-vous absolument sûr ?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Cette action ne peut pas être annulée. Cela supprimera
-                  définitivement votre compte et effacera vos données de nos
-                  serveurs.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Annuler</AlertDialogCancel>
-                <AlertDialogAction
-                  className=" cursor-pointer w-full bg-destructive/90 hover:bg-destructive text-white"
-                  onClick={onSubmit}
-                  disabled={isPending || confirmation !== session?.user?.name}
-                >
-                  Continuer
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </CardContent>
-      </Card>
-    </>
+                Continuer
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </CardContent>
+    </Card>
   );
 };
 export default UserDeleteForm;
