@@ -38,31 +38,29 @@ const signInSchema = z.object({
 
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { username, password } = data;
-  try {
-    await auth.api.signInUsername({
-      body: {
-        username,
-        password,
-      },
-      rememberMe: false,
-      callbackURL: "/dashboard",
-    });
-    const redirectTo = formData.get("redirect") as string | null;
 
+  const userOne = await auth.api.signInUsername({
+    body: {
+      username,
+      password,
+    },
+    rememberMe: false,
+    callbackURL: "/dashboard",
+    onError: (ctx: any) => {
+      // Handle the error
+      if (ctx.error.status === 403) {
+        alert("Please verify your email address");
+      }
+      //you can also show the original error message
+      alert(ctx.error.message);
+    },
+    onSuccess: (ctx: any) => {
+      redirect("/dashboard");
+    },
+  });
+  const redirectTo = formData.get("redirect") as string | null;
+  if (userOne) {
     redirect("/dashboard");
-  } catch (error) {
-    const existingUser = await db
-      .select()
-      .from(user)
-      .where(or(eq(user.username, username)))
-      .limit(1);
-    if (existingUser.length < 0) {
-      return {
-        error: "Un utilisateur mot de passe ou code client error.",
-        username,
-        password,
-      };
-    }
   }
 });
 

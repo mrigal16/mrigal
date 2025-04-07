@@ -22,7 +22,12 @@ function UserMenu() {
   const user = use(userPromise);
   //const { data: session } = useSession();
   const router = useRouter();
-
+  const logOut = () => {
+    authClient.signOut({});
+    router.refresh();
+    router.replace("/");
+    redirect("/"); // redirect to login page
+  };
   if (!user) {
     return (
       <>
@@ -63,17 +68,9 @@ function UserMenu() {
         </DropdownMenuItem>
 
         <button
-          onClick={() =>
-            authClient.signOut({
-              fetchOptions: {
-                onSuccess: () => {
-                  router.refresh();
-                  router.replace("/");
-                  redirect("/"); // redirect to login page
-                },
-              },
-            })
-          }
+          onClick={() => {
+            logOut();
+          }}
           className="flex w-full"
         >
           <DropdownMenuItem className="w-full flex-1 cursor-pointer">
