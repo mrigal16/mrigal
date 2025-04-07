@@ -443,6 +443,11 @@ export function SignUpFuc() {
               )}
             </div>
           </form>
+          {state?.error && (
+            <div className="text-center text-red-500 text-sm">
+              {state.error}
+            </div>
+          )}
         </Form>
 
         <div className="mt-6">

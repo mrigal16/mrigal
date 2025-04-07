@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, sql, or } from "drizzle-orm";
 import { db } from "@/db/drizzle";
 
 import { validatedAction, validatedActionWithUser } from "@/lib/middelware";
@@ -38,26 +38,31 @@ const signInSchema = z.object({
 
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { username, password } = data;
-  const userOne = await auth.api.signInUsername({
-    body: {
-      username,
-      password,
-    },
-    rememberMe: false,
-    callbackURL: "/dashboard",
-    onError: (ctx: any) => {
-      // Handle the error
-      if (ctx.error.status === 403) {
-        alert("Please verify your email address");
-      }
-      //you can also show the original error message
-      alert(ctx.error.message);
-    },
-    onSuccess: (ctx: any) => {},
-  });
-  const redirectTo = formData.get("redirect") as string | null;
-  if (userOne) {
+  try {
+    await auth.api.signInUsername({
+      body: {
+        username,
+        password,
+      },
+      rememberMe: false,
+      callbackURL: "/dashboard",
+    });
+    const redirectTo = formData.get("redirect") as string | null;
+
     redirect("/dashboard");
+  } catch (error) {
+    const existingUser = await db
+      .select()
+      .from(user)
+      .where(or(eq(user.username, username)))
+      .limit(1);
+    if (existingUser.length < 0) {
+      return {
+        error: "Un utilisateur mot de passe ou code client error.",
+        username,
+        password,
+      };
+    }
   }
 });
 
@@ -110,21 +115,9 @@ const signUpSchema = z.object({
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { name, email, commune, ilot, phone, adresse, username, password } =
     data;
-  await auth.api.signUpEmail({
-    body: {
-      email,
-      password,
-      name,
-      commune,
-      ilot,
-      phone,
-      adresse,
-      username,
-    },
-    callbackURL: "/",
-    onError: (ctx: any) => {
-      return {
-        error: "Échec de la création de l'utilisateur. Veuillez réessayer.",
+  try {
+    await auth.api.signUpEmail({
+      body: {
         email,
         password,
         name,
@@ -133,14 +126,31 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
         phone,
         adresse,
         username,
+      },
+      callbackURL: "/",
+    });
+  } catch (error) {
+    const existingUser = await db
+      .select()
+      .from(user)
+      .where(
+        or(
+          eq(user.email, email),
+          eq(user.phone, phone),
+          eq(user.username, username)
+        )
+      )
+      .limit(1);
+    if (existingUser.length > 0) {
+      return {
+        error:
+          "Un utilisateur avec cet email, numéro de Téléphone ou code client existe déjà.",
+        email,
+        phone,
+        username,
       };
-    },
-    onSuccess: (ctx: any) => {
-      console.log("cre");
-    },
-  });
-
-  redirect("/verification");
+    }
+  }
 });
 //export async function signOut() {
 //  const user = (await getUser()) as User;

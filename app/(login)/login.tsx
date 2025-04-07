@@ -203,6 +203,11 @@ export function Login({ mode = "signin" }) {
                 </ul>
               )}
             </div>
+            {state?.error && (
+              <div className="text-center text-red-500 text-sm">
+                {state.error}
+              </div>
+            )}
           </form>
         </Form>
 
