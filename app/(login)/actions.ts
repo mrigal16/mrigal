@@ -123,10 +123,17 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
     },
     callbackURL: "/",
     onError: (ctx: any) => {
-      // Handle the error
-
-      //you can also show the original error message
-      alert(ctx.error.message);
+      return {
+        error: "Échec de la création de l'utilisateur. Veuillez réessayer.",
+        email,
+        password,
+        name,
+        commune,
+        ilot,
+        phone,
+        adresse,
+        username,
+      };
     },
     onSuccess: (ctx: any) => {
       console.log("cre");
