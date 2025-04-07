@@ -22,10 +22,10 @@ function UserMenu() {
   const user = use(userPromise);
   //const { data: session } = useSession();
   const router = useRouter();
-  const logOut = () => {
-    authClient.signOut({});
+  const logOut = async () => {
+    await authClient.signOut();
     router.refresh();
-    router.replace("/");
+    router.push("/");
     redirect("/"); // redirect to login page
   };
   if (!user) {
