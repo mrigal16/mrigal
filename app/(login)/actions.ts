@@ -113,44 +113,19 @@ const signUpSchema = z.object({
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { name, email, commune, ilot, phone, adresse, username, password } =
     data;
-  try {
-    const existingUser = await db
-      .select()
-      .from(user)
-      .where(
-        or(
-          eq(user.email, email),
-          eq(user.phone, phone),
-          eq(user.username, username)
-        )
+
+  const existingUser = await db
+    .select()
+    .from(user)
+    .where(
+      or(
+        eq(user.email, email),
+        eq(user.phone, phone),
+        eq(user.username, username)
       )
-      .limit(1);
-    if (existingUser.length > 0) {
-      return {
-        error:
-          "Un utilisateur avec cet email, numéro de Téléphone ou code client existe déjà.",
-        email,
-        phone,
-        username,
-      };
-    }
-    const userOne = await auth.api.signUpEmail({
-      body: {
-        email,
-        password,
-        name,
-        commune,
-        ilot,
-        phone,
-        adresse,
-        username,
-      },
-      callbackURL: "/",
-    });
-    if (userOne) {
-      redirect("/verification");
-    }
-  } catch (error) {
+    )
+    .limit(1);
+  if (existingUser.length > 0) {
     return {
       error:
         "Un utilisateur avec cet email, numéro de Téléphone ou code client existe déjà.",
@@ -158,6 +133,22 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
       phone,
       username,
     };
+  }
+  const userOne = await auth.api.signUpEmail({
+    body: {
+      email,
+      password,
+      name,
+      commune,
+      ilot,
+      phone,
+      adresse,
+      username,
+    },
+    callbackURL: "/",
+  });
+  if (userOne) {
+    redirect("/verification");
   }
 });
 //export async function signOut() {
