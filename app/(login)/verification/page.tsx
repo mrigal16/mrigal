@@ -12,7 +12,8 @@ export default function Verification() {
           Vérification de l'email
         </h1>
         <p className="text-base text-gray-500">
-          un email de vérification a été envoyé à votre adresse email
+          Nous vous avons envoyé un e-mail de vérification. Si vous ne le voyez
+          pas, vérifiez votre dossier spam.
         </p>
         <Link
           href="/"
