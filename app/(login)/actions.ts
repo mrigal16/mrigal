@@ -114,7 +114,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { name, email, commune, ilot, phone, adresse, username, password } =
     data;
   try {
-    await auth.api.signUpEmail({
+    const userOne = await auth.api.signUpEmail({
       body: {
         email,
         password,
@@ -127,7 +127,9 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
       },
       callbackURL: "/",
     });
-    redirect("/verification");
+    if (userOne) {
+      redirect("/verification");
+    }
   } catch (error) {
     const existingUser = await db
       .select()
