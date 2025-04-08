@@ -20,15 +20,17 @@ function UserMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userPromise } = useUser();
   const user = use(userPromise);
+  const { data: session } = authClient.useSession();
+
   //const { data: session } = useSession();
   const router = useRouter();
   const logOut = async () => {
     await authClient.signOut();
     router.refresh();
-    router.push("/");
-    redirect("/"); // redirect to login page
+    router.replace("/sign-in");
+    // redirect to login page
   };
-  if (!user) {
+  if (!session) {
     return (
       <>
         <Button
@@ -56,7 +58,7 @@ function UserMenu() {
     <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <DropdownMenuTrigger>
         <div className="cursor-pointer ">
-          <p>{user.name} </p>
+          <p>{session.user.name} </p>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="flex flex-col gap-1">
@@ -67,12 +69,7 @@ function UserMenu() {
           </Link>
         </DropdownMenuItem>
 
-        <button
-          onClick={() => {
-            logOut();
-          }}
-          className="flex w-full"
-        >
+        <button onClick={logOut} className="flex w-full">
           <DropdownMenuItem className="w-full flex-1 cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
             <span>Déconnexion</span>

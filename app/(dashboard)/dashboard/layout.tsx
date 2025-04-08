@@ -6,7 +6,7 @@ import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Settings, Shield, Activity, Menu } from "lucide-react";
 import { Header } from "../layout";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { useUser } from "@/lib/context";
 
 export default function DashboardLayout({
@@ -18,12 +18,13 @@ export default function DashboardLayout({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { userPromise } = useUser();
   const user = use(userPromise);
-  //const { data: session } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
-  if (!user) {
-    router.replace("/");
-    redirect("/");
+  if (!session) {
+    router.refresh();
+    router.replace("/sign-in");
+    return <></>;
   }
   const navItems = [
     { href: "/dashboard/factures", icon: Activity, label: "Factures" },
