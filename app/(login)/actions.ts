@@ -151,7 +151,13 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
       redirect("/verification");
     }
   } catch (error) {
-    error;
+    return {
+      error:
+        "Un utilisateur avec cet email, numéro de Téléphone ou code client existe déjà.",
+      email,
+      phone,
+      username,
+    };
   }
 });
 //export async function signOut() {
