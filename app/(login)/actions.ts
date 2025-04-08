@@ -114,23 +114,6 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { name, email, commune, ilot, phone, adresse, username, password } =
     data;
   try {
-    const userOne = await auth.api.signUpEmail({
-      body: {
-        email,
-        password,
-        name,
-        commune,
-        ilot,
-        phone,
-        adresse,
-        username,
-      },
-      callbackURL: "/",
-    });
-    if (userOne) {
-      redirect("/verification");
-    }
-  } catch (error) {
     const existingUser = await db
       .select()
       .from(user)
@@ -151,6 +134,24 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
         username,
       };
     }
+    const userOne = await auth.api.signUpEmail({
+      body: {
+        email,
+        password,
+        name,
+        commune,
+        ilot,
+        phone,
+        adresse,
+        username,
+      },
+      callbackURL: "/",
+    });
+    if (userOne) {
+      redirect("/verification");
+    }
+  } catch (error) {
+    error;
   }
 });
 //export async function signOut() {
