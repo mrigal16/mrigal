@@ -127,6 +127,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
       },
       callbackURL: "/",
     });
+    redirect("/verification");
   } catch (error) {
     const existingUser = await db
       .select()
