@@ -55,7 +55,7 @@ export default async function GeneralPage() {
                 <Phone className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Phone
+                    Téléphone 
                   </p>
                   <p className="text-sm">{user?.phone}</p>
                 </div>
