@@ -36,10 +36,10 @@ export default function FetchInvoice({ invoiceId }: { invoiceId: string }) {
             href={fileUrl}
             download={`facture.pdf`}
           >
-            Télecharger
+            Télécharger 
           </a>
         ) : (
-          <p> Télecharger</p>
+          <p> Télécharger</p>
         )}
       </div>
     </>
