@@ -114,26 +114,6 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { name, email, commune, ilot, phone, adresse, username, password } =
     data;
 
-  const existingUser = await db
-    .select()
-    .from(user)
-    .where(
-      or(
-        eq(user.email, email),
-        eq(user.phone, phone),
-        eq(user.username, username)
-      )
-    )
-    .limit(1);
-  if (existingUser.length > 0) {
-    return {
-      error:
-        "Un utilisateur avec cet email, numéro de Téléphone ou code client existe déjà.",
-      email,
-      phone,
-      username,
-    };
-  }
   const userOne = await auth.api.signUpEmail({
     body: {
       email,
@@ -145,7 +125,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
       adresse,
       username,
     },
-    callbackURL: "/",
+    callbackURL: "/verification",
   });
   if (userOne) {
     redirect("/verification");
