@@ -12,11 +12,11 @@ const __dirname = path.dirname(__filename);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // true for port 465, false for other ports
+  port: process.env.PORT,
+  secure: true, // true for port 465, false for other ports
   auth: {
-    user: "mrigal.digitservz16@gmail.com",
-    pass: "jtpf xbha jubt gbtp",
+    user: process.env.EMAIL_MAIN, // generated ethereal user
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 export const auth = betterAuth({
