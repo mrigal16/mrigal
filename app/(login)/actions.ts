@@ -30,9 +30,13 @@ import { facturesTable, user } from "@/db/schema";
 const signInSchema = z.object({
   username: z
     .string()
-    .min(9, { message: "Le code client doit contenir 9 caractères" })
-    .max(9)
-    .regex(/^\d+$/, "Le code client doit contenir uniquement des chiffres"),
+    .length(10, {
+      message: "Le code client doit contenir exactement 10 caractères",
+    })
+    .regex(
+      /^[A-Z0-9]+$/,
+      "Le code client doit contenir uniquement des lettres majuscules et des chiffres"
+    ),
   password: z.string({ message: "code client invalide" }).min(8).max(100),
 });
 
@@ -79,9 +83,13 @@ const signUpSchema = z.object({
   }),
   username: z
     .string()
-    .min(9, { message: "Le code client doit contenir 9 caractères" })
-    .max(9)
-    .regex(/^\d+$/, "Le code client doit contenir uniquement des chiffres"),
+    .length(10, {
+      message: "Le code client doit contenir exactement 10 caractères",
+    })
+    .regex(
+      /^[A-Z0-9]+$/,
+      "Le code client doit contenir uniquement des lettres majuscules et des chiffres"
+    ),
   email: z.string().email({ message: "Adresse e-mail est invalide." }),
   adresse: z
     .string()

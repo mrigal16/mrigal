@@ -30,9 +30,13 @@ export function Login({ mode = "signin" }) {
   const FormSchema = z.object({
     username: z
       .string()
-      .min(9, { message: "Le code client doit contenir 9 caractères" })
-      .max(9)
-      .regex(/^\d+$/, "Le code client doit contenir uniquement des chiffres"),
+      .length(10, {
+        message: "Le code client doit contenir exactement 10 caractères",
+      })
+      .regex(
+        /^[A-Z0-9]+$/,
+        "Le code client doit contenir uniquement des lettres majuscules et des chiffres"
+      ),
     password: z.string().min(8, {
       message: "Le mot de passe doit contenir au moins 8 caractères",
     }),

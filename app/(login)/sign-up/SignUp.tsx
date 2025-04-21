@@ -45,9 +45,13 @@ export function SignUpFuc() {
     }),
     username: z
       .string()
-      .min(9, { message: "Le code client doit contenir 9 caractères" })
-      .max(9)
-      .regex(/^\d+$/, "Le code client doit contenir uniquement des chiffres"),
+      .length(10, {
+        message: "Le code client doit contenir exactement 10 caractères",
+      })
+      .regex(
+        /^[A-Z0-9]+$/,
+        "Le code client doit contenir uniquement des lettres majuscules et des chiffres"
+      ),
     email: z.string().email({ message: "Adresse e-mail est invalide." }),
     adresse: z
       .string()
@@ -341,9 +345,9 @@ export function SignUpFuc() {
                       id="username"
                       type="text"
                       required
-                      maxLength={9}
+                      maxLength={10}
                       className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 "
-                      placeholder="Enter votre code client"
+                      placeholder="Enter votre numéro code dossier  "
                       {...field}
                     />
                   </FormControl>
