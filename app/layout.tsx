@@ -5,6 +5,7 @@ import { Manrope } from "next/font/google";
 import { getUser } from "@/lib/plugin";
 import { UserProvider } from "@/lib/context";
 import { Footer } from "./(dashboard)/layout";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Mrigal",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen">
         <UserProvider userPromise={userPromise}>{children}</UserProvider>
       </body>
+      <GoogleAnalytics gaId="G-SCQ8VZFG85" />
     </html>
   );
 }

@@ -30,8 +30,11 @@ import { facturesTable, user } from "@/db/schema";
 const signInSchema = z.object({
   username: z
     .string()
-    .length(10, {
-      message: "Le code client doit contenir exactement 10 caractères",
+    .min(9, {
+      message: "Le code client doit contenir 9 ou 10 caractères",
+    })
+    .max(10, {
+      message: "Le code client doit contenir 9 ou 10 caractères",
     })
     .regex(
       /^[A-Z0-9]+$/,
@@ -83,8 +86,11 @@ const signUpSchema = z.object({
   }),
   username: z
     .string()
-    .length(10, {
-      message: "Le code client doit contenir exactement 10 caractères",
+    .min(9, {
+      message: "Le code client doit contenir 9 ou 10 caractères",
+    })
+    .max(10, {
+      message: "Le code client doit contenir 9 ou 10 caractères",
     })
     .regex(
       /^[A-Z0-9]+$/,
