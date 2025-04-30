@@ -10,7 +10,9 @@ export default function SignUpPage() {
         <div className="py-24 hidden md:flex flex-col  ">
           <Image className="" src={digit} alt="digitservZ" />
         </div>
-        <div className="my-2"></div>
+        <div className="my-2">
+          <SignUpFuc />
+        </div>
       </div>
     </Suspense>
   );
