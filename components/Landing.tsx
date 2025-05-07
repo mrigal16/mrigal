@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/app/(dashboard)/layout";
 import Link from "next/link";
+import { Card, CardContent, CardTitle } from "./ui/card";
 
 function FloatingPaths({ position }: { position: number }) {
   const paths = Array.from({ length: 36 }, (_, i) => ({
@@ -147,8 +148,16 @@ export default function BackgroundPaths({
             </Button>
           </div>
         </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+        >
+          <p className="max-w-4xl mx-auto text-4xl md:text-3xl font-bold mb-4 text-black/60 mt-5 ">
+            Démarches AADL en toute simplicité
+          </p>
+        </motion.div>
       </div>
-      <div className="pb-26"></div>
     </div>
   );
 }

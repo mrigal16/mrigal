@@ -138,7 +138,7 @@ export function Login({ mode = "signin" }) {
                       type="text"
                       //defaultValue={state.username}
                       required
-                      maxLength={9}
+                      maxLength={10}
                       className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 "
                       placeholder="Enter votre code client"
                       {...field}

@@ -19,7 +19,7 @@ export async function getActivityLogs() {
       num_avis: facturesTable.num_avis,
     })
     .from(facturesTable)
-    .leftJoin(livreurTable, eq(facturesTable.livreurNom, livreurTable.id))
+    //.leftJoin(livreurTable, eq(facturesTable.livreurNom, livreurTable.id))
     //.leftJoin(
     //  userTable,
     //  eq(facturesTable.utiliateurId, user.code_client)
