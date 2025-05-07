@@ -17,8 +17,8 @@ export default function HomePage() {
       <Landing />
       <div className="mt-26 grid lg:grid-cols-3 gap-3 m-3 grid-cols-1">
         <Card
-          className="flex aspect-[2/1] w-full max-w-md flex-col items-center justify-center rounded-xl border text-white
-         border-black/30 p-8 text-center bg-black/60"
+          className="flex aspect-[2/1] w-full max-w-md flex-col items-center justify-center rounded-xl  text-white
+          p-8 text-center bg-black/60"
         >
           <CardTitle className="font-extrabold text-xl w-max p-2 ">
             🧾Obtenez votre reçu AADL sans tracas
@@ -29,8 +29,8 @@ export default function HomePage() {
           </CardContent>
         </Card>
         <Card
-          className="flex w-full max-w-md flex-col items-center justify-center rounded-xl border text-white
-         border-black/30 p-8 text-center bg-black/60"
+          className="flex w-full max-w-md flex-col items-center justify-center rounded-xl  text-white
+          p-8 text-center bg-black/60"
         >
           <CardTitle className="font-extrabold text-xl w-max p-2 ">
             📊 Suivez l’avancement de votre paiement
@@ -41,8 +41,8 @@ export default function HomePage() {
           </CardContent>
         </Card>
         <Card
-          className="flex aspect-[2/1] w-full max-w-md flex-col items-center justify-center rounded-xl border text-white
-         border-black/30 p-8 text-center bg-black/60"
+          className="flex aspect-[2/1] w-full max-w-md flex-col items-center justify-center rounded-xl  text-white
+         p-8 text-center bg-black/60"
         >
           <CardTitle className="font-extrabold text-xl w-max p-2 ">
             🔐 Inscription simple et sécurisée

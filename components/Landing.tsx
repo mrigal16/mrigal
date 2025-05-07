@@ -148,15 +148,6 @@ export default function BackgroundPaths({
             </Button>
           </div>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-        >
-          <p className="max-w-4xl mx-auto text-4xl md:text-3xl font-bold mb-4 text-black/60 mt-5 ">
-            Démarches AADL en toute simplicité
-          </p>
-        </motion.div>
       </div>
     </div>
   );
