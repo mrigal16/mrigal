@@ -74,7 +74,7 @@ const ForgotPassword = () => {
       </CardTitle>
       <CardDescription className="mt-8 text-center sm:mx-auto sm:w-full sm:max-w-md">
         Entrez votre email pour envoyer le lien de réinitialisation du mot de
-        passe
+        passe (vérifé votre e-mail)
       </CardDescription>
       <Form {...form}>
         <form className="space-y-6 mt-2" onSubmit={form.handleSubmit(onSubmit)}>

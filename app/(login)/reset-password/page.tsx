@@ -82,9 +82,7 @@ const ResetPassword = () => {
       <CardTitle className="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Réinitialiser le mot de passe
       </CardTitle>
-      <CardDescription className="mt-8 text-center sm:mx-auto sm:w-full sm:max-w-md">
-        Enter your email to send link to reset password
-      </CardDescription>
+
       <Form {...form}>
         <form className="space-y-6 mt-2" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
