@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -84,60 +85,65 @@ const ResetPassword = () => {
     }
   };
   return (
-    <Card className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
-      <CardTitle className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Réinitialiser le mot de passe
-      </CardTitle>
+    <Suspense fallback={"Patientez-vous"}>
+      <Card className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
+        <CardTitle className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Réinitialiser le mot de passe
+        </CardTitle>
 
-      <Form {...form}>
-        <form className="space-y-6 mt-2" onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="block text-sm font-medium text-gray-700">
-                  Mot de passe
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={loading}
-                    type="password"
-                    placeholder="************"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="block text-sm font-medium text-gray-700">
-                  Confirme Mot de passe
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={loading}
-                    type="password"
-                    placeholder="*************"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {error && <FormMessage>{error}</FormMessage>}
-          <Button type="submit" className="w-full" disabled={loading}>
-            Submit
-          </Button>
-        </form>
-      </Form>
-    </Card>
+        <Form {...form}>
+          <form
+            className="space-y-6 mt-2"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="block text-sm font-medium text-gray-700">
+                    Mot de passe
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      type="password"
+                      placeholder="************"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="block text-sm font-medium text-gray-700">
+                    Confirme Mot de passe
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      type="password"
+                      placeholder="*************"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {error && <FormMessage>{error}</FormMessage>}
+            <Button type="submit" className="w-full" disabled={loading}>
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </Card>
+    </Suspense>
   );
 };
 
