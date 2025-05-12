@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 const ResetPasswordSchema = z
@@ -34,10 +34,12 @@ const ResetPasswordSchema = z
     // checks if the password and confirm password are equal
   });
 const ResetPassword = () => {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token"); // useSearchParams to get the token
 
   const form = useForm<z.infer<typeof ResetPasswordSchema>>({
     resolver: zodResolver(ResetPasswordSchema),
@@ -48,23 +50,28 @@ const ResetPassword = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof ResetPasswordSchema>) => {
+    if (!token) {
+      setError("Invalid or missing reset token"); // Error handling for when the token doesn't exist
+      return;
+    }
+
     try {
-      // Call the authClient's reset password method, passing the email and a redirect URL.
       await authClient.resetPassword(
         {
-          newPassword: values.password, // new password given by user
+          newPassword: values.password,
+          token: token, // passing in the token along with the new password
         },
         {
           onResponse: () => {
             setLoading(false);
           },
           onRequest: () => {
-            form.reset();
+            //  resetState();
             setLoading(true);
           },
           onSuccess: () => {
             setSuccess("New password has been created");
-            router.replace("/signin");
+            router.replace("/sign-in");
           },
           onError: (ctx) => {
             setError(ctx.error.message);
@@ -72,11 +79,10 @@ const ResetPassword = () => {
         }
       );
     } catch (error) {
-      // catches the error
+      console.log(error);
       setError("Something went wrong");
     }
   };
-
   return (
     <Card className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
       <CardTitle className="mt-6 text-center text-3xl font-extrabold text-gray-900">
