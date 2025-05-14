@@ -28,7 +28,7 @@ export default function DashboardLayout({
   }, [session, router]);
 
   if (!session) {
-    return <div>chargement</div>; // ou un loader
+    return <div>Chargement</div>; // ou un loader
   }
   const navItems = [
     { href: "/dashboard/factures", icon: Activity, label: "Factures" },
