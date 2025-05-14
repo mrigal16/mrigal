@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -12,6 +13,7 @@ import { format } from "date-fns";
 import { Briefcase, Calendar, Mail, MapPin, Phone, User } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getUser } from "@/lib/plugin";
+import { Button } from "@/components/ui/button";
 
 export default async function GeneralPage() {
   const user = await getUser();
@@ -19,6 +21,7 @@ export default async function GeneralPage() {
   if (!user) {
     redirect("/");
   }
+
   return (
     <section className="flex-1 p-4 lg:p-8">
       <Card className="w-full max-w-3xl mx-auto">
@@ -55,7 +58,7 @@ export default async function GeneralPage() {
                 <Phone className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Téléphone 
+                    Téléphone
                   </p>
                   <p className="text-sm">{user?.phone}</p>
                 </div>
@@ -111,6 +114,13 @@ export default async function GeneralPage() {
             </div>
           </div>
         </CardContent>
+        <CardFooter>
+          <Button>
+            <a href="/procturation.pdf" download="Procuration.pdf">
+              Télecharger Procuration
+            </a>
+          </Button>
+        </CardFooter>
       </Card>
     </section>
   );

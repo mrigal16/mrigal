@@ -24,6 +24,9 @@ export default async function ActivityPage() {
     <section className="flex-1 p-4 lg:p-8">
       <Card>
         <CardHeader>
+          <CardTitle className="bg-red-500 text-white w-max p-2">
+            Télécharger la procuration dans générale
+          </CardTitle>
           <CardTitle>Factures Recentes</CardTitle>
         </CardHeader>
         <CardContent>
