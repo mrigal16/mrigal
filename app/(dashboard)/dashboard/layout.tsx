@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -21,10 +21,14 @@ export default function DashboardLayout({
   const { data: session } = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    if (!session) {
+      router.replace("/sign-in");
+    }
+  }, [session, router]);
+
   if (!session) {
-    router.refresh();
-    router.replace("/sign-in");
-    return <></>;
+    return <div>chargement</div>; // ou un loader
   }
   const navItems = [
     { href: "/dashboard/factures", icon: Activity, label: "Factures" },
