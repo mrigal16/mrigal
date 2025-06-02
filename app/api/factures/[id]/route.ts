@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 
 import { eq, desc } from "drizzle-orm";
-import { invoices } from "@/db/schema";
+import { facturesTable } from "@/db/schema";
 import { db } from "@/db/drizzle";
 import { supabase } from "@/lib/superbase";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: number } }
 ) {
   try {
     const { id } = await params;
@@ -19,19 +19,25 @@ export async function GET(
     }
 
     // Fetch invoice from database
-    const invoicesList = await db
+
+    //const invoicesList = await db
+    //  .select()
+    //  .from(invoices)
+    //  .where(eq(invoices.utiliateurId, id))
+    //  .orderBy(desc(invoices.createdAt))
+    //  .limit(5);
+    const invoiceList = await db
       .select()
-      .from(invoices)
-      .where(eq(invoices.utiliateurId, id))
-      .orderBy(desc(invoices.createdAt))
+      .from(facturesTable)
+      .where(eq(facturesTable.id, id))
       .limit(1);
 
-    if (invoicesList.length === 0) {
+    if (invoiceList.length === 0) {
       return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
     }
 
     // Extract file path
-    const filePath = invoicesList[0].url;
+    const filePath = invoiceList[0].url;
     if (!filePath) {
       return NextResponse.json({ error: "File path missing" }, { status: 400 });
     }
