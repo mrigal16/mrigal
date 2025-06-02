@@ -152,9 +152,10 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
             filterFn: "fuzzy",
             sortingFn: fuzzySort,
             header: () => <p>Action</p>,
-            cell: () => (
-              <FetchInvoice invoiceId={Session?.id || "default-id"} />
-            ),
+            cell: (props) => {
+              const invoiceId = props.row.original.id; // id de la facture
+              return <FetchInvoice invoiceId={invoiceId} />;
+            },
             footer: (props) => props.column.id,
           },
         ],
