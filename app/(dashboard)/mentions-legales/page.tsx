@@ -53,7 +53,7 @@ const Legal = () => {
       <p className="hyphens-auto text-wrap p-1">
         « Application/Applications » désigne les applications M’rigal Web et
         M’rigal mobile développées par la société Sarl DigitservZ disponibles
-        sur le web Via le lien https://mrigal.vercel.app/ , « Conditions »
+        sur le web Via le lien https://mrigal.digitservz.dz/ , « Conditions »
         désigne les présentes conditions générales d’utilisation; «
         Client/E-consommateur » désigne toute personne physique ou morale
         souhaitant bénéficier des services (ci-après : les « Clients ») ou un
@@ -72,10 +72,10 @@ const Legal = () => {
         présentes. Les frais Additionnels sont ajoutés aux tarifs applicables,
         le cas échéant; « Services » désigne les services disponibles sur les
         applications et/ou site web M’rigal; « Site Web » désigné une Interface
-        dynamique disponible sur l’adresse https://mrigal.vercel.app/; « Tarifs
-        » désigne les prix applicables aux Services qui vous seront expressément
-        communiqués via l’Application et/ou Site Internet au moment de la
-        validation de l’inscription ; «E-paiement ou Moyen de paiement
+        dynamique disponible sur l’adresse https://mrigal.digitservz.dz/; «
+        Tarifs » désigne les prix applicables aux Services qui vous seront
+        expressément communiqués via l’Application et/ou Site Internet au moment
+        de la validation de l’inscription ; «E-paiement ou Moyen de paiement
         électronique » désigne tout instrument de paiement, autorisé
         conformément à la législation en vigueur, permettant à son titulaire
         d’effectuer des paiements de proximité ou à distance à travers un
