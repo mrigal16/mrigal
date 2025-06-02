@@ -32,7 +32,7 @@ export default function FetchInvoice({ invoiceId }: { invoiceId: string }) {
       {fileUrl ? (
         <a
           href={fileUrl}
-          download={`facture-${invoiceId}.pdf`}
+          download={`facture.pdf`}
           className="hover:underline text-blue-500"
         >
           Télécharger
