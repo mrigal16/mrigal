@@ -21,7 +21,7 @@ export async function getActivityLogs() {
     .from(facturesTable)
     //.leftJoin(livreurTable, eq(facturesTable.livreurNom, livreurTable.id))
     //.leftJoin(
-    //  userTable,
+    // // userTable,
     //  eq(facturesTable.utiliateurId, user.code_client)
     //) // Ajout du join manquant
     .where(eq(facturesTable.utiliateurId, user.id))
