@@ -18,7 +18,7 @@ const SendEmail = async ({
     service: "gmail",
     host: "smtp.gmail.com",
     port: 587,
-    secure: false, // true for port 465, false for other ports
+    secure: true, // true for port 465, false for other ports
     auth: {
       user: "mrigal.digitservz16@gmail.com",
       pass: "kdgh jfnb vlfv ptew",
