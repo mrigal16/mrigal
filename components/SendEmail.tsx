@@ -15,17 +15,17 @@ const SendEmail = async ({
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const transporter = nodemailer.createTransport({
-    host: "mail.digitservz.dz",
-    port: 465,
-    secure: true, // true for port 465, false for other ports
-    auth: {
-      user: "mrigal@digitservz.dz",
-      pass: "mrigal1616",
+    host: process.env.EMAIL_HOST,
+     port: process.env.PORT,
+  secure: true, // true for port 465, false for other ports
+  auth: {
+    user: process.env.EMAIL_MAIN, // generated ethereal user
+    pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   const info = transporter.sendMail({
-    from: '"DigitservZ"<mrigal@digitservz.dz>', // sender address
+    from: `"DigitservZ"<${process.env.EMAIL_MAIN}>`, // sender address
     to: [to], // list of receivers
     subject: "Mrigal", // Subject line
     text: "Inscription dans le service Mrigal", // plain text body
