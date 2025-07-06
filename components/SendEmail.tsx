@@ -15,18 +15,17 @@ const SendEmail = async ({
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
+    host: "mail.digitservz.dz",
     port: 465,
     secure: true, // true for port 465, false for other ports
     auth: {
-      user: "mrigal.digitservz16@gmail.com",
-      pass: "kdgh jfnb vlfv ptew",
+      user: "mrigal@digitservz.dz",
+      pass: "mrigal1616",
     },
   });
 
   const info = transporter.sendMail({
-    from: '"DigitservZ"<mrigal.digitservz16@gmail.com>', // sender address
+    from: '"DigitservZ"<mrigal@digitservz.dz>', // sender address
     to: [to], // list of receivers
     subject: "Mrigal", // Subject line
     text: "Inscription dans le service Mrigal", // plain text body
