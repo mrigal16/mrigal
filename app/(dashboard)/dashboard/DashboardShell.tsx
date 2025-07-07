@@ -27,7 +27,7 @@ export default function DashboardShell({
     { href: "/dashboard/factures", icon: Activity, label: "Factures" },
     { href: "/dashboard/generale", icon: Settings, label: "Générale" },
     { href: "/dashboard/security", icon: Shield, label: "Paramètre" },
-    { href: "/dashboard/payment", icon: Shield, label: "Paiement" },
+    
   ];
 
   return (
