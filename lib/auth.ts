@@ -10,11 +10,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
-  port: process.env.PORT,
-  secure: true, // true for port 465, false for other ports
-  auth: {
+    host: process.env.EMAIL_HOST,
+    port: process.env.PORT,
+    secure: true, // true for port 465, false for other ports
+    auth: {
     user: process.env.EMAIL_MAIN, // generated ethereal user
     pass: process.env.EMAIL_PASSWORD,
   },
@@ -60,7 +59,7 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url, token }, request) => {
       await transporter.sendMail({
-        from: '"DigitservZ"<mrigal.digitservz@gmail.com>',
+        from: `"DigitservZ"<${process.env.EMAIL_MAIN}>`,
         to: user.email,
         subject: "Vérifiez votre adresse e-mail",
         html: `<!DOCTYPE html>
