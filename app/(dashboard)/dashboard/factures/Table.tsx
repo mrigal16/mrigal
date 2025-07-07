@@ -109,7 +109,7 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
               <DataTableColumnHeader column={column} title="Status" />
             ),
             cell(props) {
-              if (props.row.original.status === "non payé") {
+              if (props.row.original.status === "non pay") {
                 return (
                   <Badge className="bg-red-500" variant="default">
                     Non Payé
