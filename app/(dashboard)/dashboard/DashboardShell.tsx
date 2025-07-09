@@ -37,7 +37,7 @@ export default function DashboardShell({
           <div className="flex items-center">
           <span className="font-medium">Acceuil</span>
         </div>
-        <Button variant="ghost" onClick={() => setIsSidebarOpen((o) => !o)}>
+        <Button variant="ghost" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
           <Menu className="h-6 w-6" />
            <span className="sr-only">sidebar</span>
         </Button>
