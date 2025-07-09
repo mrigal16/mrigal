@@ -34,19 +34,22 @@ export default function DashboardShell({
     <div className="flex flex-col min-h-[calc(100dvh-68px)] max-w-7xl mx-auto w-full">
       {/* Mobile header */}
       <div className="lg:hidden flex items-center justify-between bg-white border-b border-gray-200 p-4">
-        <span className="font-medium">Accueil</span>
+          <div className="flex items-center">
+          <span className="font-medium">Acceuil</span>
+        </div>
         <Button variant="ghost" onClick={() => setIsSidebarOpen((o) => !o)}>
           <Menu className="h-6 w-6" />
+           <span className="sr-only">sidebar</span>
         </Button>
       </div>
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <aside
-          className={`w-64 bg-white lg:bg-gray-50 border-r border-gray-200 lg:block transition-transform duration-300 ease-in-out ${
-            isSidebarOpen
-              ? "translate-x-0"
-              : "-translate-x-full lg:translate-x-0"
+          className={`w-64 bg-white lg:bg-gray-50 border-r border-gray-200 lg:block ${
+            isSidebarOpen ? "block" : "hidden"
+          } lg:relative absolute inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           <nav className="h-full overflow-y-auto p-4 space-y-1">
