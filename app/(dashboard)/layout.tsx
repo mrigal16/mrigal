@@ -163,7 +163,7 @@ export function Footer() {
         <div className="border-t border-slate-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-black text-sm">
-              &copy; {new Date().getFullYear()} Sarl DigitservZ
+              &copy; {new Date().getFullYear()} <a href="https://digitservz.dz" className='text-blue-600'>Sarl DigitservZ</a>
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link
