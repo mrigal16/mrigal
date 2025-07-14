@@ -55,8 +55,11 @@ try {
       callbackURL: "/dashboard",
     });
 
-    const redirectTo = formData.get("redirect") as string | null;
-    redirect(redirectTo || "/dashboard");
+    return {
+      status: "success",
+      message: "Connexion réussie.",
+      redirectTo: "/dashboard",
+    };
   } catch (error: any) {
     const message = error?.message?.toLowerCase() || "";
     

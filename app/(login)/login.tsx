@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams ,useRouter} from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,7 +22,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-
 export function Login({ mode = "signin" }) {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
@@ -70,11 +69,12 @@ export function Login({ mode = "signin" }) {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+ const router = useRouter();
   useEffect(() => {
-    if (state?.success) {
-      toast.success(
-        "Formulaire soumis avec succès! Vos informations ont été enregistrées."
-      );
+    if (state?.status === "success") {
+      setTimeout(() => {
+        router.push(state.redirectTo || "/dashboard");
+      }, 100); // small delay to show toast before redirect
     }
   }, [state]);
 
